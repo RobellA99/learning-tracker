@@ -1,0 +1,32 @@
+@use "../../styles/partials/mixins" as *;
+
+.header {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__title {
+    text-decoration: none;
+    color: black;
+  }
+
+  &__nav {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    border: 2px solid black;
+    border-radius: 2rem;
+    padding: 0.7rem 1rem;
+    align-items: center;
+  }
+
+  &__nav-link {
+    &.active {
+      border-radius: 2rem;
+      border: 2px solid black;
+      padding: 0.5rem 1rem;
+    }
+  }
+}
