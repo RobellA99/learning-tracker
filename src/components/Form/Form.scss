@@ -1,0 +1,8 @@
+.form {
+  &__button {
+    &--selected {
+      background-color: red;
+      font-weight: bold;
+    }
+  }
+}
