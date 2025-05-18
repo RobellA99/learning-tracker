@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./Form.scss";
 
 export default function Form() {
-  const [selectedForm, setSelectedForm] = useState("login");
+  const [selectedButton, setSelectedButton] = useState("login");
 
   return (
     <form className="form">
@@ -15,7 +15,7 @@ export default function Form() {
         <label>
           <input type="password" placeholder="Password" />
         </label>
-        {selectedForm === "signup" ? (
+        {selectedButton === "signup" ? (
           <>
             <h3 className="form__title">Confirm Password:</h3>
             <label>
@@ -27,23 +27,23 @@ export default function Form() {
           <button
             type="button"
             className={`form__button${
-              selectedForm === "login" ? " form__button--selected" : ""
+              selectedButton === "login" ? " form__button--selected" : ""
             }`}
-            onClick={() => setSelectedForm("login")}
+            onClick={() => setSelectedButton("login")}
           >
             Log In
           </button>
           <button
             type="button"
             className={`form__button${
-              selectedForm === "signup" ? " form__button--selected" : ""
+              selectedButton === "signup" ? " form__button--selected" : ""
             }`}
-            onClick={() => setSelectedForm("signup")}
+            onClick={() => setSelectedButton("signup")}
           >
             Sign Up
           </button>
         </div>
-        <button>Submit</button>
+        <button className="form__button--submit">Submit</button>
       </fieldset>
     </form>
   );
