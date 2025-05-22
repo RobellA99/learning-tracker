@@ -4,6 +4,8 @@ export default function Form({
   handleChange,
   setSelectedButton,
   handleSubmit,
+  errorMessage,
+  success,
 }) {
   const [selectedButton, setSelectedButton] = useState("login");
   return (
@@ -54,6 +56,8 @@ export default function Form({
           </button>
         </div>
         <button className="form__button--submit">Submit</button>
+        {errorMessage && <p>{errorMessage}</p>}
+        {success && <p>Success! Redirecting to learn page...</p>}
       </fieldset>
     </form>
   );

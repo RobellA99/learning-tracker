@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 export default function LandingPage() {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
+  const [success, setSuccess] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -60,6 +61,8 @@ export default function LandingPage() {
           handleChange={handleChange}
           setSelectedButton={setSelectedButton}
           handleSubmit={handleSubmit}
+          errorMessage={errorMessage}
+          success={success}
         />
       </section>
     </>
