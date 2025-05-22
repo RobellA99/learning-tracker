@@ -5,6 +5,7 @@ export default function Form({
   setSelectedButton,
   handleSubmit,
 }) {
+  const [selectedButton, setSelectedButton] = useState("login");
   return (
     <form className="form" onSubmit={handleSubmit}>
       <fieldset>
