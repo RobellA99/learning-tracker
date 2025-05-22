@@ -1,19 +1,28 @@
-import { useState } from "react";
 import "./Form.scss";
 
-export default function Form() {
-  const [selectedButton, setSelectedButton] = useState("login");
-
+export default function Form({
+  handleChange,
+  setSelectedButton,
+  handleSubmit,
+}) {
   return (
-    <form className="form">
+    <form className="form" onSubmit={handleSubmit}>
       <fieldset>
         <h3 className="form__title">Email:</h3>
         <label>
-          <input type="text" placeholder="Email" />
+          <input
+            type="text"
+            placeholder="Email"
+            onChange={(e) => handleChange(e)}
+          />
         </label>
         <h3 className="form__title">Password:</h3>
         <label>
-          <input type="password" placeholder="Password" />
+          <input
+            type="password"
+            placeholder="Password"
+            onChange={(e) => handleChange(e)}
+          />
         </label>
         {selectedButton === "signup" ? (
           <>
