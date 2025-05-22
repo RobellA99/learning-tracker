@@ -11,6 +11,7 @@ export default function LandingPage() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
+    confirmPassword: "",
   });
 
   const handleChange = (e) => {
@@ -59,10 +60,11 @@ export default function LandingPage() {
       <section>
         <Form
           handleChange={handleChange}
-          setSelectedButton={setSelectedButton}
           handleSubmit={handleSubmit}
           errorMessage={errorMessage}
           success={success}
+          formData={formData}
+          setFormData={setFormData}
         />
       </section>
     </>
