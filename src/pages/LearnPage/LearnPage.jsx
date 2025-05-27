@@ -5,6 +5,7 @@ const API_URL = import.meta.env.VITE_BACK_END_URL;
 
 export default function LearnPage() {
   const [items, setItems] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [filter, setFilter] = useState({ category: "all" });
 
   useEffect(() => {
@@ -16,7 +17,16 @@ export default function LearnPage() {
       const data = await res.json();
       setItems(data);
     };
+    const fetchCategories = async () => {
+      const token = localStorage.getItem("authToken");
+      const res = await fetch(`${API_URL}/categories`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await res.json();
+      setCategories(data);
+    };
     fetchData();
+    fetchCategories();
   }, []);
 
   const handleComplete = async (id) => {
@@ -52,9 +62,11 @@ export default function LearnPage() {
             onChange={(e) => setFilter({ ...filter, category: e.target.value })}
           >
             <option value="all">All</option>
-            {/* Map categories dynamically if available */}
-            <option value="Programming">Programming</option>
-            <option value="Math">Math</option>
+            {categories.map((cat) => (
+              <option key={cat.id} value={cat.name}>
+                {cat.name}
+              </option>
+            ))}
           </select>
         </label>
       </div>
