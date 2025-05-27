@@ -13,9 +13,13 @@ export default function Form({
   const [localError, setLocalError] = useState("");
 
   const onChange = (e) => {
+    let key = e.target.placeholder;
+    if (key === "Confirm Password") key = "confirmPassword";
+    else if (key === "Email") key = "email";
+    else if (key === "Password") key = "password";
     setFormData({
       ...formData,
-      [e.target.placeholder.replace(" ", "").toLowerCase()]: e.target.value,
+      [key]: e.target.value,
     });
     if (localError) setLocalError("");
     if (errorMessage) setLocalError("");

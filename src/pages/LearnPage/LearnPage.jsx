@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Card from "../../components/Card/Card";
 import Header from "../../components/Header/Header";
+import "./LearnPage.scss";
 const API_URL = import.meta.env.VITE_BACK_END_URL;
 
 export default function LearnPage() {
