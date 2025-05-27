@@ -1,0 +1,44 @@
+@use "../../styles/partials/variables" as *;
+
+.card {
+  background: $card-bg;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(79, 138, 139, 0.08);
+  margin: 1rem 0;
+  padding: 1rem;
+  transition: box-shadow 0.2s;
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    font-weight: bold;
+    color: $primary;
+  }
+  &__arrow {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: $primary;
+  }
+  &__details {
+    margin-top: 1rem;
+    color: #222831;
+  }
+  &__complete {
+    background: $accent;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    margin-top: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  &--completed {
+    background: #f5f5f5;
+    color: $completed;
+    text-decoration: line-through;
+    .card__complete {
+      display: none;
+    }
+  }
+}
