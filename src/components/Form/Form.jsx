@@ -90,8 +90,12 @@ export default function Form({
           </button>
         </div>
         <button className="form__button--submit">Submit</button>
-        {(localError || errorMessage) && <p>{localError || errorMessage}</p>}
-        {success && <p>Success! Redirecting to learn page...</p>}
+        {(localError || errorMessage) && (
+          <p className="form__error">{localError || errorMessage}</p>
+        )}
+        {success && (
+          <p className="form__success">Success! Redirecting to learn page...</p>
+        )}
       </fieldset>
     </form>
   );
