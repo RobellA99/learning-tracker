@@ -41,6 +41,19 @@ export default function Form({
   return (
     <form className="form" onSubmit={onSubmit}>
       <fieldset>
+        {selectedButton === "signup" && (
+          <>
+            <h3 className="form__title">Name:</h3>
+            <label>
+              <input
+                type="text"
+                placeholder="Name"
+                value={formData.name}
+                onChange={onChange}
+              />
+            </label>
+          </>
+        )}
         <h3 className="form__title">Email:</h3>
         <label>
           <input
@@ -61,15 +74,6 @@ export default function Form({
         </label>
         {selectedButton === "signup" ? (
           <>
-            <h3 className="form__title">Name:</h3>
-            <label>
-              <input
-                type="text"
-                placeholder="Name"
-                value={formData.name}
-                onChange={onChange}
-              />
-            </label>
             <h3 className="form__title">Confirm Password:</h3>
             <label>
               <input
