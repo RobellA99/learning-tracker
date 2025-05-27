@@ -1,8 +1,7 @@
-import Form from "../../components/Form/Form";
-import "./LandingPage.scss";
-import { emailRegex } from "../../../lib/regex";
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
+import Form from "../../components/Form/Form";
+const API_URL = import.meta.env.VITE_BACK_END_URL;
 
 export default function LandingPage() {
   const navigate = useNavigate();
@@ -15,58 +14,61 @@ export default function LandingPage() {
   });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.placeholder.replace(" ", "").toLowerCase()]: e.target.value,
+    });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, data, mode) => {
     e.preventDefault();
     setErrorMessage("");
-
-    if (!formData.email || !formData.password) {
-      setErrorMessage("Must provide a username and a password");
-      return;
-    }
-
-    if (!emailRegex.test(formData.email)) {
-      setErrorMessage(
-        "The email address is not valid. Expected format: x@x.xx"
-      );
-      return;
-    }
+    setSuccess(false);
 
     try {
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_BACK_END_URL}/user/login`,
-        {
-          email: formData.email,
-          password: formData.password,
+      if (mode === "signup") {
+        const res = await fetch(`${API_URL}/user/register`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+        if (!res.ok) {
+          const err = await res.json();
+          setErrorMessage(err.message || "Sign up failed");
+          return;
         }
-      );
-      localStorage.setItem("authToken", data.authToken);
-
-      setSuccess(true);
-      setTimeout(() => {
-        navigate("/learn");
-      }, 2000);
-    } catch (error) {
-      setErrorMessage(error.response.data.message);
+        setSuccess(true);
+        setTimeout(() => navigate("/learn"), 1500);
+      } else {
+        const res = await fetch(`${API_URL}/user/login`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+        const result = await res.json();
+        if (!res.ok) {
+          setErrorMessage(result.message || "Login failed");
+          return;
+        }
+        localStorage.setItem("authToken", result.token);
+        setSuccess(true);
+        setTimeout(() => navigate("/learn"), 1500);
+      }
+    } catch (err) {
+      setErrorMessage("Network error");
     }
   };
+
   return (
-    <>
-      <section className="title">
-        <h1 className="title__text">Keep Track of What You Learn</h1>
-      </section>
-      <section>
-        <Form
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          errorMessage={errorMessage}
-          success={success}
-          formData={formData}
-          setFormData={setFormData}
-        />
-      </section>
-    </>
+    <div>
+      <Form
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        errorMessage={errorMessage}
+        success={success}
+        formData={formData}
+        setFormData={setFormData}
+      />
+    </div>
   );
 }
