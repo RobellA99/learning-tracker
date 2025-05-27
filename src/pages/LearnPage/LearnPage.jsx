@@ -20,7 +20,7 @@ export default function LearnPage() {
     };
     const fetchCategories = async () => {
       const token = localStorage.getItem("authToken");
-      const res = await fetch(`${API_URL}/skills?category=${filter.category}`, {
+      const res = await fetch(`${API_URL}/categories`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
