@@ -1,22 +1,30 @@
-import { Link, NavLink } from "react-router";
+import { Link, useNavigate } from "react-router-dom";
 import "./Header.scss";
 
 export default function Header() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    navigate("/");
+  };
+
   return (
     <header className="header">
-      <div className="header__container">
-        <Link to="/" className="header__title">
-          <h2 className="header__text">Track Your Learning</h2>
+      <Link to="/learn" className="header__logo">
+        Learning Tracker
+      </Link>
+      <nav className="header__nav">
+        <Link to="/learn" className="header__link">
+          Learn
         </Link>
-        <div className="header__nav">
-          <NavLink to="/learn" className="header__nav-link">
-            Learn
-          </NavLink>
-          <NavLink to="/profile" className="header__nav-link">
-            Profile
-          </NavLink>
-        </div>
-      </div>
+        <Link to="/profile" className="header__link">
+          Profile
+        </Link>
+        <button className="header__logout" onClick={handleLogout}>
+          Logout
+        </button>
+      </nav>
     </header>
   );
 }

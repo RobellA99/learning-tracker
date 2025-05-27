@@ -1,60 +1,49 @@
-@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
 
 .header {
-  &__container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: $primary;
+  color: #fff;
+  padding: 1rem 2rem;
+  border-radius: 0 0 16px 16px;
 
-    @include tablet {
-      flex-direction: row;
-      justify-content: space-between;
-      padding: 1rem 0.5rem;
-    }
-  }
-
-  &__title {
+  &__logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
     text-decoration: none;
-    color: black;
-  }
-
-  &__text {
-    font-size: 1.7rem;
-    @include desktop {
-      font-size: 2rem;
-    }
   }
 
   &__nav {
     display: flex;
-    justify-content: space-between;
-    width: 70%;
-    border: 2px solid black;
-    border-radius: 2rem;
-    padding: 0.7rem 1rem;
+    gap: 1.5rem;
     align-items: center;
+  }
 
-    @include tablet {
-      width: 30%;
-    }
-
-    @include desktop {
-      width: 25%;
+  &__link {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+    &:hover {
+      color: $accent;
     }
   }
 
-  &__nav-link {
-    justify-content: space-between;
-    color: black;
-    text-decoration: none;
-
-    @include desktop {
-      font-size: 1.3rem;
-    }
-    &.active {
-      border-radius: 2rem;
-      border: 2px solid black;
-      padding: 0.5rem 1rem;
+  &__logout {
+    background: $accent;
+    color: $primary;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+    &:hover {
+      background: #fff;
+      color: $primary;
     }
   }
 }
