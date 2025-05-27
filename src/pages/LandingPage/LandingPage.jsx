@@ -8,17 +8,11 @@ export default function LandingPage() {
   const [errorMessage, setErrorMessage] = useState("");
   const [success, setSuccess] = useState(false);
   const [formData, setFormData] = useState({
+    name: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.placeholder.replace(" ", "").toLowerCase()]: e.target.value,
-    });
-  };
 
   const handleSubmit = async (e, data, mode) => {
     e.preventDefault();
@@ -62,7 +56,6 @@ export default function LandingPage() {
   return (
     <div>
       <Form
-        handleChange={handleChange}
         handleSubmit={handleSubmit}
         errorMessage={errorMessage}
         success={success}

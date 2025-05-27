@@ -2,7 +2,6 @@ import { useState } from "react";
 import "./Form.scss";
 
 export default function Form({
-  handleChange,
   handleSubmit,
   errorMessage,
   success,
@@ -14,7 +13,8 @@ export default function Form({
 
   const onChange = (e) => {
     let key = e.target.placeholder;
-    if (key === "Confirm Password") key = "confirmPassword";
+    if (key === "Name") key = "name";
+    else if (key === "Confirm Password") key = "confirmPassword";
     else if (key === "Email") key = "email";
     else if (key === "Password") key = "password";
     setFormData({
@@ -23,7 +23,6 @@ export default function Form({
     });
     if (localError) setLocalError("");
     if (errorMessage) setLocalError("");
-    if (handleChange) handleChange(e);
   };
 
   const onSubmit = (e) => {
@@ -62,6 +61,15 @@ export default function Form({
         </label>
         {selectedButton === "signup" ? (
           <>
+            <h3 className="form__title">Name:</h3>
+            <label>
+              <input
+                type="text"
+                placeholder="Name"
+                value={formData.name}
+                onChange={onChange}
+              />
+            </label>
             <h3 className="form__title">Confirm Password:</h3>
             <label>
               <input
